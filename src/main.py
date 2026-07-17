@@ -45,6 +45,10 @@ def main():
     STATE_EMPTY = 2
     STATE_ERROR = 3
 
+    # Adicionando constantes
+    THRESHOLD_EMPTY = 500
+    THRESHOLD_FULL = 4900
+
     current_state = None
 
     while True:
@@ -58,14 +62,14 @@ def main():
                     current_state = STATE_ERROR
 
             # Mensagem 3: Caixa Vazia
-            elif weight < 500:
+            elif weight < THRESHOLD_EMPTY:
                 if current_state != STATE_EMPTY:
                     print("Evento de reposição disparado! Caixa vazia detectada.")
                     current_state = STATE_EMPTY
 
             # Mensagem 2 e 4: Estado Regular e Retorno de Carga
             else:
-                if current_state == STATE_EMPTY and weight >= 4900:
+                if current_state == STATE_EMPTY and weight >= THRESHOLD_FULL:
                     print("Abastecimento concluído. Caixa cheia.")
 
                 current_state = STATE_REGULAR
